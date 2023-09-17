@@ -1,52 +1,65 @@
 import random
 
 
+#função que lê o arquivo de input e atribui o numero de itens, pesos, valores e capacidade da mochila
 def recebe_input(nome_arqv):
-    print("teste")
+    arqv = open(nome_arqv, 'r')
+    itens = arqv.readline()
+    peso = []
+    fim = ''
+    valor = []
+
+    for linha in arqv:
+        fim = linha
+        if len(linha.split()) != 1:
+            valor.append(linha.split()[1])
+            peso.append(linha.split()[2])
+    return itens, peso, valor, fim
+
 # Defina os parâmetros do problema
-num_itens = 20  # Número de itens disponíveis
 
-# Pesos e valores dos itens
-pesos = [3485, 326, 416, 4992, 4649, 795, 1457, 4815, 4446, 5422, 2791, 3359, 3667, 1598, 3007, 3544, 6334, 766, 3994, 1893]
-valores = [5094, 6506, 5248, 2421, 322, 5237, 3043, 845, 4955, 2252, 2009, 6901, 6122, 5094, 738, 4574, 3715, 5882, 5367, 1984]
+num_itens, pesos, valores, capacidade_mochila = recebe_input("input/input3.in")
 
-capacidade_mochila = 7001  # Capacidade máxima da mochila
 
 # Função de aptidão: Avalia uma solução (representada como uma lista binária)
 def aptidao(solucao):
     valor_total = 0
     peso_total = 0
-    for i in range(num_itens):
+    for i in range(int(num_itens)):
         if solucao[i] == 1:
-            valor_total += valores[i]
-            peso_total += pesos[i]
-    if peso_total > capacidade_mochila:
+            valor_total += int(valores[i])
+            peso_total += int(pesos[i])
+    if peso_total > int(capacidade_mochila):
         return 0  # Penalize soluções inválidas
     return valor_total
 
+
 # Função para criar uma solução inicial aleatória
 def criar_solucao():
-    return [random.randint(0, 1) for _ in range(num_itens)]
+    return [random.randint(0, 1) for _ in range(int(num_itens))]
+
 
 # Operador de crossover: Dois pontos de corte
 def crossover(pai1, pai2):
-    ponto_corte1 = random.randint(1, num_itens - 2)
-    ponto_corte2 = random.randint(ponto_corte1 + 1, num_itens - 1)
+    ponto_corte1 = random.randint(1, int(num_itens) - 2)
+    ponto_corte2 = random.randint(ponto_corte1 + 1, int(num_itens) - 1)
     filho1 = pai1[:ponto_corte1] + pai2[ponto_corte1:ponto_corte2] + pai1[ponto_corte2:]
     filho2 = pai2[:ponto_corte1] + pai1[ponto_corte1:ponto_corte2] + pai2[ponto_corte2:]
     return filho1, filho2
 
+
 # Operador de mutação: Inversão de bits
 def mutacao(solucao):
-    posicao = random.randint(0, num_itens - 1)
+    posicao = random.randint(0, int(num_itens) - 1)
     solucao[posicao] = 1 - solucao[posicao]  # Inverte o bit
     return solucao
 
+
 # Algoritmo Genético
-tamanho_populacao = 250
+tamanho_populacao = 5000
 taxa_crossover = 0.7
-taxa_mutacao = 0.13586
-num_geracoes = 400
+taxa_mutacao = 1
+num_geracoes = 5000
 
 populacao = [criar_solucao() for _ in range(tamanho_populacao)]
 
@@ -96,7 +109,8 @@ for geracao in range(num_geracoes):
         melhor_geracao_global = geracao
 
 # No final da execução
-print("Melhor solução encontrada:")
-print("Melhor Geração: ", melhor_geracao_global)
-print("Itens na mochila:", melhor_solucao_global)
-print("Valor total:", melhor_valor_global)
+arquivo = open("Output/output3.out", 'w', encoding='UTF-8')
+
+arquivo.write("Output 3 Melhor Solução: \n")
+arquivo.write(f"Melhor Geração: {melhor_geracao_global}\nValor total: {melhor_valor_global} \nItens na mochila: {melhor_solucao_global}\n\n")
+arquivo.write(f"Tamanho da População: {tamanho_populacao}\nNumero de Gerações: {num_geracoes}\nTaxa de Mutação: {taxa_mutacao}\nTaxa de crossover: {taxa_crossover}\n")

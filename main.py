@@ -18,7 +18,7 @@ def recebe_input(nome_arqv):
 
 # Defina os parâmetros do problema
 
-num_itens, pesos, valores, capacidade_mochila = recebe_input("input/input3.in")
+num_itens, pesos, valores, capacidade_mochila = recebe_input("input/input_.in")#Digitar numero do input no lugar do _ --> input1.in
 
 
 # Função de aptidão: Avalia uma solução (representada como uma lista binária)
@@ -109,8 +109,8 @@ for geracao in range(num_geracoes):
         melhor_geracao_global = geracao
 
 # No final da execução
-arquivo = open("Output/output3.out", 'w', encoding='UTF-8')
+arquivo = open("Output/output_.out", 'w', encoding='UTF-8')# Colocar o numero do output para ser gerado --> output4.out
 
-arquivo.write("Output 3 Melhor Solução: \n")
+arquivo.write("Output _ Melhor Solução: \n")# Colocar numero do output, igual o de cima. --> Output 4 Melhor Solução: 
 arquivo.write(f"Melhor Geração: {melhor_geracao_global}\nValor total: {melhor_valor_global} \nItens na mochila: {melhor_solucao_global}\n\n")
 arquivo.write(f"Tamanho da População: {tamanho_populacao}\nNumero de Gerações: {num_geracoes}\nTaxa de Mutação: {taxa_mutacao}\nTaxa de crossover: {taxa_crossover}\n")

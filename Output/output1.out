@@ -1,0 +1,10 @@
+Output 1 Melhor Solução: 
+Melhor Geração: 87
+Valor total: 31621 
+Itens na mochila: [0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
+Tamanho da População: 1500
+Numero de Gerações: 5000
+Taxa de Mutação: 0.25698
+Taxa de crossover: 0.7
+

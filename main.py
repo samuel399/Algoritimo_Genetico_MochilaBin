@@ -114,3 +114,5 @@ arquivo = open("Output/output_.out", 'w', encoding='UTF-8')# Colocar o numero do
 arquivo.write("Output _ Melhor Solução: \n")# Colocar numero do output, igual o de cima. --> Output 4 Melhor Solução: 
 arquivo.write(f"Melhor Geração: {melhor_geracao_global}\nValor total: {melhor_valor_global} \nItens na mochila: {melhor_solucao_global}\n\n")
 arquivo.write(f"Tamanho da População: {tamanho_populacao}\nNumero de Gerações: {num_geracoes}\nTaxa de Mutação: {taxa_mutacao}\nTaxa de crossover: {taxa_crossover}\n")
+
+arquivo.close()
